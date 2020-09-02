@@ -1,0 +1,16 @@
+{
+    "TableName": "BaseDeArtistas",
+    "KeySchema": [
+      { "AttributeName": "UUID", "KeyType": "HASH" },
+      { "AttributeName": "Artista", "KeyType": "RANGE" }
+      
+    ],
+    "AttributeDefinitions": [
+      { "AttributeName": "Artista", "AttributeType": "S" },
+      { "AttributeName": "UUID", "AttributeType": "S" }
+    ],
+    "ProvisionedThroughput": {
+      "ReadCapacityUnits": 10,
+      "WriteCapacityUnits": 10
+    }
+}
