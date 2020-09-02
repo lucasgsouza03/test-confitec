@@ -17,13 +17,19 @@ def get_items():
     args = request.args
     artist = args['artist']
     cache = args['cache']
-    try:
-        r.exists(artist)
-    except:
+    if cache == 'false':
         top_musics = ginius_controller.get_by_artist(artist)
         r.hset(artist, top_musics)
+    else:
+        try:
+            r.exists(artist)
+            top_musics = r.hget(artist)
 
-        return jsonify(top_musics)
+        except:
+            top_musics = ginius_controller.get_by_artist(artist)
+            r.hset(artist, top_musics)
+    
+    return jsonify(top_musics)
 
 
 if __name__ == '__main__':
